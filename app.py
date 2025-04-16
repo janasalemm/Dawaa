@@ -43,5 +43,14 @@ def add():
         return redirect("/")
     return render_template("add.html")
 
+@app.route("/delete/<int:medicine_id>", methods=["POST"])
+def delete(medicine_id):
+    conn = sqlite3.connect("dawaa.db")
+    db = conn.cursor()
+    db.execute("DELETE FROM medicines WHERE id = ?", (medicine_id,))
+    conn.commit()
+    conn.close()
+    return redirect("/")
+
 if __name__ == "__main__":
     app.run(debug=True)
