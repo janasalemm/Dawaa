@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h2>جدول الأدوية</h2>
+
+    {% if medicines %}
+        <table border="1" cellpadding="10">
+            <tr>
+                <th>الاسم</th>
+                <th>عدد المرات في اليوم</th>
+                <th>الأوقات</th>
+                <th>إجراء</th>
+            </tr>
+            {% for med in medicines %}
+            <tr>
+                <td>{{ med[1] }}</td>
+                <td>{{ med[2] }}</td>
+                <td>{{ med[3] }}</td>
+                <td>
+                    <form method="POST" action="/delete/{{ med[0] }}" onsubmit="return confirm('هل أنت متأكد من حذف الدواء؟');">
+                        <button type="submit">حذف</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>لا توجد أدوية مضافة بعد.</p>
+    {% endif %}
+
+    <script>
+        const now = new Date();
+        const hour = now.getHours();
+        const minute = now.getMinutes();
+
+        if ((hour === 8 && minute >= 0 && minute <= 10) ||
+            (hour === 14 && minute >= 0 && minute <= 10) ||
+            (hour === 21 && minute >= 0 && minute <= 10)) {
+            alert("تذكير: هذا وقت تناول دوائك!");
+        }
+    </script>
+{% endblock %}
