@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>دواؤك</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>تطبيق دواؤك</h1>
+    <nav>
+        <a href="/">الصفحة الرئيسية</a> |
+        <a href="/add">إضافة دواء</a>
+    </nav>
+    <hr>
+    {% block content %}{% endblock %}
+</body>
+</html>
